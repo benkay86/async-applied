@@ -1,4 +1,4 @@
-This exampls is part of a larger repository of examples, [async-applied](../README.md).
+This example is part of a larger repository of examples, [async-applied](../README.md).
 
 # reqwest-tokio
 
