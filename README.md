@@ -75,3 +75,12 @@ The runtime (also called executor or reactor) is what schedules your async tasks
 As Rusts's async ecosystem matures we are starting to see high-level frameworks built on top of tokio and other mid-level crates.  Chief among these is the appropriately-named:
 
 * [tower](https://github.com/tower-rs/tower), a network services framework.
+
+## License
+
+This project is licensed under either of
+
+* Apache License, Version 2.0, (LICENSE-APACHE or http://www.apache.org/licenses/LICENSE-2.0)
+* MIT license (LICENSE-MIT or http://opensource.org/licenses/MIT)
+
+at your option.
