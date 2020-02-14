@@ -1,0 +1,13 @@
+[workspace]
+
+members = [
+  "reqwest-tokio",
+  "reqwest-tokio-compat",
+  "util",
+]
+
+# Needed to make the *-compat examples work with cargo workspaces.
+# See https://github.com/rust-lang/cargo/issues/6126.
+[patch.crates-io]
+tokio = { git = "https://github.com/tokio-rs/tokio" }
+tokio-util = { git = "https://github.com/tokio-rs/tokio" }
