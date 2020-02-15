@@ -29,9 +29,9 @@ For example, if writing an async task to compute the first one million numbers i
 
 Because you have familiarized yourself with async/await by reading other tutorials, you know that async/await syntax requires the use of a runtime (a.k.a. executor) to schedule async tasks and drive them to completion.  You also know that writing an async/await task that performs io (input/output) is impossible with the primitives in [std::io](https://doc.rust-lang.org/std/io/) because the standard library primitives block.  Therefore, in addition to a runtime, any non-trivial async task that performs io needs non-blocking, asynchronous io primitives.  At the time of this writing _none_ of these features are provided by the Rust standard library.  They all exist in crates within the async ecosystem.
 
-### The Foundation
+### The Vocabulary
 
-At the foundation of the async ecosystem is a set of common traits that describe how the different parts of the ecosystem interact with each other.  Currently these are in:
+At the bottom of the async ecosystem is a set of traits that serve as a common vocabulary to describe how the different parts of the ecosystem interact with each other.  Currently these are in:
 
 * [`std::future`](https://doc.rust-lang.org/std/future), the parts of the async ecosystem that have been stabilized, most notably:
 	- [`Future`](https://doc.rust-lang.org/std/future/trait.Future.html), the fundamental trait describing an asynchronous unit of computation.
@@ -42,18 +42,18 @@ At the foundation of the async ecosystem is a set of common traits that describe
 
 Note that in the beginning, before async/await was stabilized, the [futures](https://github.com/rust-lang/futures-rs) crate defined everything async and even provided macros like `await!` that are mostly not needed now that async and await have been stabilized.  To avoid encountering such fossils you should make sure to use futures version 0.3 or greater.
 
-### The Building Blocks
+### The Foundation
 
-You are free to implement the foundational async traits yourself, an in fact it is not that hard to implement a `Future` to perform an asynchronous computation (e.g. fibbonaci sequence).  Asynchronous input/output (io) operations are much more complicated to implement because they require support from the operating system.  Just above the foundational traits above, the following crates are building blocks upon which the rest of the async ecosystem rests.  They are important and so you should know they exist -- but it is unlikely you will ever need to use them.
+You are free to implement the async traits yourself, and in fact it is not that hard to implement a `Future` to perform an asynchronous computation (e.g. fibbonaci sequence).  Asynchronous input/output (io) operations are much more complicated to implement because they require support from the operating system.  The foundation of async is a set of io-related crates upon which the rest of the async ecosystem rests.  They are important and so you should know they exist -- but it is unlikely you will ever need to use them directly.
 
 * [mio](https://github.com/tokio-rs/mio) interfaces with the operating system to define asynchronous versions of file, socket, etc primitives.
 * [hyper](https://github.com/hyperium/hyper) is an HTTP protocol implementation with an asynchronous design.
 
-### The Implementors
+### The Building Blocks
 
-The building blocks above are quite primitive, and it would not be very ergonomic to use them directly.  The following crates use those building blocks to implement traits like `AsyncRead` on, for example, a file.  They define the modules and structures you will interact with most often in the async ecosystem.  Note that some of these crates are listed again under Runtimes below.
+The foundational crates above are quite primitive, and it would not be very ergonomic to use them directly.  The following crates build upon that foundation to implement traits like `AsyncRead` on, for example, a file.  They define the modules and structures you will interact with most often in the async ecosystem.  Note that some of these crates are listed again under Runtimes below.
 
-* [async-std](https://async.rs) 1.5 implements async traits on files, sockets, etc.  It aims to be easy to learn and hue closely to the the style of its synchronous counterparts in `std::io`.  It is compatible with all the foundational traits in [futures](https://github.com/rust-lang/futures-rs).
+* [async-std](https://async.rs) 1.5 implements async traits on files, sockets, etc.  It aims to be easy to learn and hew closely to the the style of its synchronous counterparts in `std::io`.  It is compatible with all the foundational traits in [futures](https://github.com/rust-lang/futures-rs).
 * [tokio](https://tokio.rs) 0.2 implements async traits on files, sockets, etc, making it very similar to async-std.  Although it is "only" version 0.2, tokio has actually been around for longer than async-std, is used in more projects, and is arguably more stable.  However, the async ecosystem is young and it's not clear which crate is "better."  One current disadvantage of using tokio is that [`tokio::io::AsyncRead`](https://docs.rs/tokio/0.2.11/tokio/io/trait.AsyncRead.html) are not compatible with [`futures::io::AsyncRead`](https://docs.rs/futures/0.3.4/futures/io/trait.AsyncRead.html) et al, although there is a compatibility layer.  The reasons for this difference are summarized [here](https://www.reddit.com/r/rust/comments/enn3ax/strategies_for_futuresioasyncread_vs/) and [here](https://github.com/rust-lang/futures-rs/pull/1826).
 * [tokio-util](https://github.com/tokio-rs/tokio/tree/master/tokio-util) contains some additional functionality built around tokio, most critically a compatibility layer between tokio and futures.  As of this writing the compat module hasn't beel released and is only available from [master](https://github.com/tokio-rs/tokio/blob/master/tokio-util/src/compat.rs).
 * [reqwest](https://github.com/seanmonstar/reqwest) is a crate for async HTTP/TLS (think curl, wget, etc).  Don't let the strange name fool you; it is the best and only choice for async web requests.
@@ -62,7 +62,7 @@ The building blocks above are quite primitive, and it would not be very ergonomi
 
 ### The Runtimes
 
-The runtime (also called executor or reactor) is what schedules your async tasks and drives them to completion.  Although it may seem counterintuitive at first, just as there are multiple implementors for different use cases (e.g. file access vs web access) there are also multiple runtimes with slightly different performance objective and use cases.  These include:
+The runtime (also called executor or reactor) is what schedules your async tasks and drives them to completion.  Although it may seem counterintuitive at first, just as there are multiple building blocks that implement the same trait different use cases (e.g. file access vs web access), there are also multiple runtimes with slightly different performance objective and use cases.  These include:
 
 * `std::runtime` -- just kidding!  There is no runtime in the Rust standard library.  That's right, even though async/await are stabilized you will still need to use one of the runtime crates below to actually run any tasks concurrently.  This is because, as per above, there is no unifying runtime use case or obviously best runtime to be standardized.
 * [async-std](https://async.rs) 1.5 is a runtime bundled with async-std.  On the backend, the runtime has to keep track of the state of its various io operations to work efficiently, so it makes sense for the runtime and io drivers to live in the same crate. 
