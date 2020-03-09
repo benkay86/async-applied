@@ -13,12 +13,6 @@ reqwest = { version = "0.10", features = ["stream"] }
 # For a truly multithreaded tokio runtime (overkill for this example),
 # replace rt-core with rt-threaded.
 tokio = { version = "0.2", features = ["macros", "rt-core", "fs", "io-util", "io-driver"] }
-tokio-util = { version = "0.2", features = ["compat"] }
+tokio-util = { version = "~0.3.0", features = ["compat"] }
 util = { path = "../util" }
 
-# The compat feature of tokio-util is not released at the time of this writing.
-# We must therefore patch the version of tokio and tokio-util in crates.io with
-# the latest and greatest from master.
-[patch.crates-io]
-tokio = { git = "https://github.com/tokio-rs/tokio" }
-tokio-util = { git = "https://github.com/tokio-rs/tokio" }

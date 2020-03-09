@@ -12,5 +12,4 @@ reqwest = "0.10"
 # For a truly multithreaded tokio runtime (overkill for this example),
 # replace rt-core with rt-threaded.
 tokio = { version = "0.2", features = ["macros", "rt-core", "fs", "io-util", "io-driver"] }
-tokio-util = { version = "0.2", features = ["compat"] }
 util = { path = "../util" }
