@@ -18,13 +18,13 @@ async fn main() -> Result<(), util::BoxError> {
     // Create a reqwest Client
     let client = Client::new();
 
-    // We need to determine the file size before we download, so we can create a ProgressBar
+    // We need to determine the file size before we download so we can create a ProgressBar
     // A Header request for the CONTENT_LENGTH header gets us the file size
     let download_size = {
         let resp = client.head(url.as_str()).send().await?;
         if resp.status().is_success() {
             resp.headers() // Gives is the HeaderMap
-                .get(header::CONTENT_LENGTH) // Gives us an Option containin the HeaderValue
+                .get(header::CONTENT_LENGTH) // Gives us an Option containing the HeaderValue
                 .and_then(|ct_len| ct_len.to_str().ok()) // Unwraps the Option as &str
                 .and_then(|ct_len| ct_len.parse().ok()) // Parses the Option as u64
                 .unwrap_or(0) // Fallback to 0
@@ -54,7 +54,7 @@ async fn main() -> Result<(), util::BoxError> {
     // Set Style to the ProgressBar
     progress_bar.set_style(
         ProgressStyle::default_bar()
-            .template("[{bar:40.cyan/blue}] {bytes}/{total_bytes} {msg}")
+            .template("[{bar:40.cyan/blue}] {bytes}/{total_bytes} - {msg}")
             .progress_chars("#>-"),
     );
 
