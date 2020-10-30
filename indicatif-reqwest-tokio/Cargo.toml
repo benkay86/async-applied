@@ -1,0 +1,17 @@
+[package]
+name = "indicatif-reqwest-tokio"
+version = "0.1.0"
+authors = ["Beh <b@kayuk.de>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+futures = "0.3"
+indicatif = "^0"
+rand = "^0"
+# For a truly multithreaded tokio runtime (overkill for this example),
+# replace rt-core with rt-threaded.
+tokio = { version = "0.2", features = ["macros", "rt-threaded", "time", "stream", "blocking"] }
+reqwest = "0.10"
+util = { path = "../util" }
