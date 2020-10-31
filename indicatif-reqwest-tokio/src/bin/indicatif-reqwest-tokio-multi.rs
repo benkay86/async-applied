@@ -126,7 +126,11 @@ async fn main() -> Result<(), util::BoxError> {
             let multibar = multibar.clone();
             let main_pb = main_pb.clone();
             async move {
+                // Spawn a new tokio task for the current download link
+                // We need to hand over the multibar, so the ProgressBar for the task can be added
                 let _task = tokio::task::spawn(download_task(download_link, multibar)).await;
+                
+                // Increase main ProgressBar by 1
                 main_pb.inc(1);
             }
         });
