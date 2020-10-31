@@ -11,7 +11,7 @@ use tokio::{io::AsyncWriteExt};
 
 async fn download_task(
     download_url: &str,
-    multi_bar: Arc<MultiProgress>,
+    multibar: Arc<MultiProgress>,
 ) -> Result<(), util::BoxError> {
     // Parse URL into Url type
     let url = Url::parse(download_url)?;
@@ -47,7 +47,8 @@ async fn download_task(
     let request = client.get(url.as_str());
 
     // Create the ProgressBar with the aquired size from before
-    let progress_bar = multi_bar.add(ProgressBar::new(download_size));
+    // and add it to the multibar
+    let progress_bar = multibar.add(ProgressBar::new(download_size));
 
     // Set Style to the ProgressBar
     progress_bar.set_style(
@@ -59,7 +60,7 @@ async fn download_task(
     // Set the filename as message part of the progress bar
     progress_bar.set_message(&filename);
 
-    // Create the output file
+    // Create the output file with tokio's async fs lib
     let mut outfile = tokio::fs::File::create(&filename).await?;
 
     // Do the actual request to download the file
