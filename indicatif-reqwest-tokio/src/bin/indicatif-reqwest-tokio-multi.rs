@@ -41,7 +41,7 @@ async fn download_task(
     let filename = url
         .path_segments() // Splits into segments of the URL
         .and_then(|segments| segments.last()) // Retrieves the last segment
-        .unwrap_or("video.mp4"); // Fallback to generic filename
+        .unwrap_or("file.download"); // Fallback to generic filename
 
     // Here we build the actual Request with a RequestBuilder from the Client
     let request = client.get(url.as_str());
