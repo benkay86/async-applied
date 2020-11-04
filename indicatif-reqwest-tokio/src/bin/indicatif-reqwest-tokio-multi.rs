@@ -24,7 +24,7 @@ async fn download_task(
     let download_size = {
         let resp = client.head(url.as_str()).send().await?;
         if resp.status().is_success() {
-            resp.headers() // Gives is the HeaderMap
+            resp.headers() // Gives us the HeaderMap
                 .get(header::CONTENT_LENGTH) // Gives us an Option containing the HeaderValue
                 .and_then(|ct_len| ct_len.to_str().ok()) // Unwraps the Option as &str
                 .and_then(|ct_len| ct_len.parse().ok()) // Parses the Option as u64
