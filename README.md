@@ -12,6 +12,8 @@ This repository contains examples of practical async code use that you can downl
 
 * [reqwest-tokio](./reqwest-tokio/README.md) download a file using [reqwest](https://github.com/seanmonstar/reqwest) and [tokio](https://tokio.rs).
 * [reqwest-tokio-compat](./reqwest-tokio-compat/README.md) download a file using [reqwest](https://github.com/seanmonstar/reqwest) and [tokio](https://tokio.rs) using [`tokio_util::compat`](https://github.com/tokio-rs/tokio/blob/master/tokio-util/src/compat.rs) to harmonize traits between [futures](https://github.com/rust-lang/futures-rs) and tokio.
+* [indicatif-tokio](./indicatif-tokio/README.md) shows the usage of progress bars with [indicatif](https://github.com/mitsuhiko/indicatif) for iterable asynchronous tasks, single and concurrent multi examples are given
+* [indicatif-reqwest-tokio](./indicatif-reqwest-tokio/README.md) is a combination of `reqwest-tokio` and `indicatif-tokio`
 
 ## Async is Not Threads
 

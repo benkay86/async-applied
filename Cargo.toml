@@ -2,6 +2,7 @@
 
 members = [
   "indicatif-tokio",
+  "indicatif-reqwest-tokio",
   "reqwest-tokio",
   "reqwest-tokio-compat",
   "util",
