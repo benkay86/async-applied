@@ -10,7 +10,7 @@ edition = "2018"
 [dependencies]
 futures = "0.3"
 indicatif = "^0"
-rand = "^0"
+rand = ">= 0.8, < 1.0"
 # For a truly multithreaded tokio runtime (overkill for this example),
 # replace rt-core with rt-threaded.
 tokio = { version = "0.2", features = ["macros", "rt-threaded", "time", "stream", "blocking"] }
