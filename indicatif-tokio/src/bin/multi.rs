@@ -14,7 +14,7 @@ async fn main() -> Result<(), util::BoxError> {
     let tasks = futures::stream::repeat(())
         .map(|_| tokio::time::interval(
             tokio::time::Duration::from_millis(
-                rng.gen_range(task_delay_millis.0,
+                rng.gen_range(task_delay_millis.0..
                 task_delay_millis.1
             )
         ))
