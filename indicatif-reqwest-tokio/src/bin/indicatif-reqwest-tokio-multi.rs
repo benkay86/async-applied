@@ -7,7 +7,7 @@ use std::sync::Arc;
 use futures::{stream, StreamExt};
 use indicatif::{MultiProgress, ProgressBar, ProgressStyle};
 use reqwest::{header, Client, Url};
-use tokio::{io::AsyncWriteExt};
+use tokio::io::AsyncWriteExt;
 
 async fn download_task(
     download_url: &str,
