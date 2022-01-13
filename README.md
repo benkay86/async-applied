@@ -1,10 +1,14 @@
 # Async Applied
 
+Rust's async ecosystem continues to evolve rapidly -- faster than my free time permits me to write examples!  As a result, **this repository is not actively maintained.**  Please feel free to explore the old code here, and consider searching for more recent examples.
+
+## Introduction
+
 The Rust programming language supports the powerful concurrency concept of _tasks_, non-blocking computations that model cooperative concurrency.  Tasks are implemented in rust using [futures](https://doc.rust-lang.org/std/future/trait.Future.html), [async](https://doc.rust-lang.org/std/keyword.async.html), and [await](https://doc.rust-lang.org/std/keyword.await.html).  These features were [stabilized quite recently](https://blog.rust-lang.org/2019/11/07/Async-await-stable.html) on 11/7/2019.  Consequently, the ecosystem of crates that depend on them is still very much in flux, and there are not a lot of examples of how to use async/await in practice.
 
 This repository is _not_ intended as yet another tutorial or primer on async/await.  This repository _is_ intended to showcase examples demonstrating practical use of async/await applied to common, real-world problems.  You should familiarize yourself with async/await by reading one of the [excellent](https://rust-lang.github.io/async-book/01_getting_started/01_chapter.html) [existing](https://book.async.rs/) [tutorials](https://tokio.rs/docs/getting-started/hello-world/) before you attempt the examples herein.
 
-Please note that this repository is a work in progress.  Examples may change as the underlying ecosystem changes.  I intend to add more examples as time allows.  You are welcome to contribute to examples to or steal examples from this repository.
+You are welcome to contribute to examples to or steal examples from this repository.
 
 ## Examples
 
