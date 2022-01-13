@@ -155,7 +155,7 @@ async fn main() -> Result<(), util::BoxError> {
 
     // Wait for the progress bars to finish rendering.
     // The first ? unwraps the outer join() in which we are waiting for the
-    // future spawned by tokio::task::spawn_blocking to finishe.
+    // future spawned by tokio::task::spawn_blocking to finish.
     // The second ? unwraps the inner multibar.join().  
     multibar.await??;
 
